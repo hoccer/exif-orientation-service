@@ -20,7 +20,9 @@ get '/*' do |path|
     img.auto_orient!
 
     content_type img.mime_type
-    img.to_blob
+    body img.to_blob
+
+    img.destroy!
   rescue Magick::ImageMagickError
     send_file file_path
   end
